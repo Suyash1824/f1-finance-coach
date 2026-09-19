@@ -3,9 +3,7 @@ import { useRef, useState } from 'react';
 import { importCsv } from '@/lib/api';
 import { UploadCloud } from 'lucide-react';
 
-interface Props {
-  onImported: () => void;
-}
+interface Props { onImported: () => void; }
 
 export default function CsvUpload({ onImported }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -22,30 +20,32 @@ export default function CsvUpload({ onImported }: Props) {
       onImported();
     } catch {
       setStatus('Import failed — check the file format and try again.');
-    } finally {
-      setLoading(false);
-    }
+    } finally { setLoading(false); }
   };
 
   return (
     <div className="mb-8">
       <div
-        className={`relative flex flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed p-8 transition cursor-pointer
-          ${dragging ? 'border-cyan-400 bg-cyan-500/10' : 'border-slate-600 bg-slate-800/30 hover:border-slate-500'}`}
+        className={`relative flex flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed p-8 transition-all duration-200 cursor-pointer
+          ${dragging
+            ? 'border-cyan-400 bg-cyan-50 dark:bg-cyan-500/10'
+            : 'border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800/30 hover:border-gray-400 dark:hover:border-slate-500'
+          }`}
         onClick={() => inputRef.current?.click()}
         onDragOver={e => { e.preventDefault(); setDragging(true); }}
         onDragLeave={() => setDragging(false)}
         onDrop={e => { e.preventDefault(); setDragging(false); const f = e.dataTransfer.files[0]; if (f) handleFile(f); }}
       >
-        <input ref={inputRef} type="file" accept=".csv" className="hidden" onChange={e => { const f = e.target.files?.[0]; if (f) handleFile(f); }} />
-        <UploadCloud className={`w-8 h-8 ${loading ? 'animate-bounce text-cyan-400' : 'text-slate-400'}`} />
-        <p className="text-sm text-slate-300 font-medium">
+        <input ref={inputRef} type="file" accept=".csv" className="hidden"
+          onChange={e => { const f = e.target.files?.[0]; if (f) handleFile(f); }} />
+        <UploadCloud className={`w-8 h-8 transition-colors ${loading ? 'animate-bounce text-cyan-500' : 'text-gray-400 dark:text-slate-400'}`} />
+        <p className="text-sm text-gray-700 dark:text-slate-300 font-medium">
           {loading ? 'Importing…' : 'Drop your transactions CSV here or click to browse'}
         </p>
-        <p className="text-xs text-slate-500">Columns: date, merchant, amount, type</p>
+        <p className="text-xs text-gray-400 dark:text-slate-500">Columns: date, merchant, amount, type</p>
       </div>
       {status && (
-        <p className={`mt-2 text-sm px-1 ${status.startsWith('✓') ? 'text-emerald-400' : 'text-rose-400'}`}>{status}</p>
+        <p className={`mt-2 text-sm px-1 ${status.startsWith('✓') ? 'text-emerald-600 dark:text-emerald-400' : 'text-rose-600 dark:text-rose-400'}`}>{status}</p>
       )}
     </div>
   );

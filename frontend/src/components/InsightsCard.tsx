@@ -10,37 +10,36 @@ interface Props {
 
 export default function InsightsCard({ insights, loading, error }: Props) {
   return (
-    <div className="rounded-2xl border border-slate-700/50 bg-slate-800/50 p-6 backdrop-blur-sm">
+    <div className="rounded-2xl border border-gray-200 dark:border-slate-700/50 bg-white dark:bg-slate-800/50 p-6 shadow-sm dark:shadow-none transition-colors duration-300">
       <div className="flex items-center gap-2 mb-5">
-        <Sparkles className="w-5 h-5 text-fuchsia-400" />
-        <h2 className="text-lg font-semibold text-white">AI Financial Insights</h2>
-        <span className="ml-auto text-xs text-slate-500 bg-slate-700 px-2 py-0.5 rounded-full">Gemini</span>
+        <Sparkles className="w-5 h-5 text-fuchsia-600 dark:text-fuchsia-400" />
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white">AI Financial Insights</h2>
+        <span className="ml-auto text-xs text-gray-500 dark:text-slate-500 bg-gray-100 dark:bg-slate-700 px-2 py-0.5 rounded-full transition-colors duration-300">Gemini</span>
       </div>
-
       {loading && (
         <div className="space-y-3">
-          {[1, 2, 3].map(i => (
-            <div key={i} className="h-20 rounded-xl bg-slate-700/40 animate-pulse" />
+          {[1,2,3].map(i => (
+            <div key={i} className="h-20 rounded-xl bg-gray-100 dark:bg-slate-700/40 animate-pulse" />
           ))}
         </div>
       )}
       {error && (
-        <div className="rounded-xl bg-rose-500/10 border border-rose-500/30 p-4 text-rose-300 text-sm">
+        <div className="rounded-xl bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/30 p-4 text-rose-700 dark:text-rose-300 text-sm">
           {error}
         </div>
       )}
       {!loading && !error && insights.length === 0 && (
-        <p className="text-slate-400 text-sm">No insights available yet — import some transactions first.</p>
+        <p className="text-gray-500 dark:text-slate-400 text-sm">No insights yet — import some transactions first.</p>
       )}
       {!loading && !error && (
         <div className="space-y-4">
           {insights.map((ins, i) => (
-            <div key={i} className="rounded-xl bg-slate-700/30 border-l-4 border-fuchsia-500 p-4">
-              <p className="font-semibold text-white text-sm mb-1">{ins.title}</p>
-              <p className="text-slate-300 text-sm mb-2">{ins.explanation}</p>
+            <div key={i} className="rounded-xl bg-gray-50 dark:bg-slate-700/30 border-l-4 border-fuchsia-500 p-4 transition-colors duration-300">
+              <p className="font-semibold text-gray-900 dark:text-white text-sm mb-1">{ins.title}</p>
+              <p className="text-gray-600 dark:text-slate-300 text-sm mb-2">{ins.explanation}</p>
               <div className="flex items-start gap-2">
-                <span className="text-fuchsia-400 text-xs mt-0.5">→</span>
-                <p className="text-fuchsia-300 text-xs">{ins.action}</p>
+                <span className="text-fuchsia-500 text-xs mt-0.5">→</span>
+                <p className="text-fuchsia-600 dark:text-fuchsia-300 text-xs">{ins.action}</p>
               </div>
             </div>
           ))}
