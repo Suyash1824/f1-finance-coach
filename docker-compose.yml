@@ -6,7 +6,7 @@ services:
       POSTGRES_PASSWORD: devpassword
       POSTGRES_DB: financoach
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
 
@@ -27,6 +27,7 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/app
+      - /app/node_modules
     command: npm run dev
 
 volumes:
