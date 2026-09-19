@@ -1,0 +1,21 @@
+date,merchant,amount,type
+2026-08-01,Swiggy,450,expense
+2026-08-01,Salary Inc,45000,income
+2026-08-03,Netflix,199,expense
+2026-08-03,Zomato,380,expense
+2026-08-05,Uber,220,expense
+2026-08-05,Netflix,199,expense
+2026-08-07,Amazon,1200,expense
+2026-08-10,Rent Payment,12000,expense
+2026-08-10,Swiggy,410,expense
+2026-08-15,Netflix,199,expense
+2026-08-18,Uber,180,expense
+2026-08-20,Electricity Bill,850,expense
+2026-08-22,Swiggy,395,expense
+2026-08-25,Zomato,340,expense
+2026-08-28,Freelance Payment,8000,income
+2026-09-01,Salary Inc,45000,income
+2026-09-01,Rent Payment,12000,expense
+2026-09-03,Netflix,199,expense
+2026-09-05,Swiggy,460,expense
+2026-09-10,Electricity Bill,900,expense
