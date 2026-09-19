@@ -6,7 +6,6 @@ import {
   Transaction, RecurringExpense, Budget, SavingsGoal, InsightItem,
 } from '@/lib/api';
 import dynamic from 'next/dynamic';
-import SummaryBar from '@/components/SummaryBar';
 import RecurringCard from '@/components/RecurringCard';
 import BudgetsSection from '@/components/BudgetsSection';
 import SavingsGoalsSection from '@/components/SavingsGoalsSection';
@@ -15,7 +14,7 @@ import CsvUpload from '@/components/CsvUpload';
 import MoneyFlowChart from '@/components/MoneyFlowChart';
 import AnimatedCard from '@/components/AnimatedCard';
 import { useTheme } from '@/context/ThemeContext';
-import { Sun, Moon, ArrowLeft, Upload, TrendingUp, TrendingDown, PiggyBank, Wallet } from 'lucide-react';
+import { Sun, Moon, ArrowLeft, Upload, TrendingUp, TrendingDown, PiggyBank, Wallet, X } from 'lucide-react';
 
 const SpendingGalaxy = dynamic(() => import('@/components/SpendingGalaxy'), { ssr: false });
 
@@ -90,6 +89,25 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950 transition-colors duration-300">
+      
+      {/* CSV Upload Modal */}
+      {showUpload && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl w-full max-w-xl overflow-hidden relative">
+            <button 
+              onClick={() => setShowUpload(false)}
+              className="absolute top-4 right-4 p-2 text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-white bg-gray-100 dark:bg-slate-800 rounded-full transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="p-6">
+              <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">Import Transactions</h2>
+              <CsvUpload onImported={handleImported} />
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Top Header */}
       <header className="border-b border-gray-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm sticky top-0 z-40 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
@@ -103,7 +121,7 @@ export default function Dashboard() {
 
           <div className="flex items-center gap-3">
             <button
-              onClick={() => setShowUpload(!showUpload)}
+              onClick={() => setShowUpload(true)}
               className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-sm"
             >
               <Upload className="w-4 h-4" />
@@ -123,7 +141,7 @@ export default function Dashboard() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 space-y-8">
         
         {/* Dynamic Greeting & Dashboard Header Area */}
-        <div className="flex flex-col lg:flex-row gap-8 items-start justify-between">
+        <div className="flex flex-col lg:flex-row gap-8 items-center justify-between bg-white dark:bg-slate-900 p-6 rounded-3xl border border-gray-200 dark:border-slate-800 shadow-sm">
           <div className="flex-1 space-y-6 w-full">
             <div>
               <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white tracking-tight">
@@ -135,8 +153,8 @@ export default function Dashboard() {
             </div>
 
             {/* Stat Cards Row */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 shadow-sm">
+            <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
+              <div className="p-4 rounded-2xl bg-gray-50 dark:bg-slate-950 border border-gray-100 dark:border-slate-800">
                 <div className="flex items-center gap-2 text-gray-500 dark:text-slate-400 text-xs font-semibold mb-2">
                   <Wallet className="w-4 h-4 text-indigo-500" />
                   TOTAL BALANCE
@@ -146,7 +164,7 @@ export default function Dashboard() {
                 </div>
               </div>
               
-              <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 shadow-sm">
+              <div className="p-4 rounded-2xl bg-gray-50 dark:bg-slate-950 border border-gray-100 dark:border-slate-800">
                 <div className="flex items-center gap-2 text-gray-500 dark:text-slate-400 text-xs font-semibold mb-2">
                   <TrendingUp className="w-4 h-4 text-emerald-500" />
                   TOTAL INCOME
@@ -156,7 +174,7 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 shadow-sm">
+              <div className="p-4 rounded-2xl bg-gray-50 dark:bg-slate-950 border border-gray-100 dark:border-slate-800">
                 <div className="flex items-center gap-2 text-gray-500 dark:text-slate-400 text-xs font-semibold mb-2">
                   <TrendingDown className="w-4 h-4 text-rose-500" />
                   TOTAL EXPENSES
@@ -166,7 +184,7 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-gray-200 dark:border-slate-800 shadow-sm">
+              <div className="p-4 rounded-2xl bg-gray-50 dark:bg-slate-950 border border-gray-100 dark:border-slate-800">
                 <div className="flex items-center gap-2 text-gray-500 dark:text-slate-400 text-xs font-semibold mb-2">
                   <PiggyBank className="w-4 h-4 text-amber-500" />
                   YOUR SAVINGS
@@ -179,21 +197,11 @@ export default function Dashboard() {
           </div>
 
           {/* Smaller Animated Card embedded in header */}
-          <div className="hidden md:flex shrink-0 w-80 lg:w-96 justify-center items-center">
-             <div className="scale-75 origin-top-right lg:scale-90 lg:origin-center">
-               <AnimatedCard interactive={false} />
-             </div>
+          <div className="hidden lg:block shrink-0 transform scale-[0.6] origin-right mr-12 opacity-90">
+             <AnimatedCard interactive={false} />
           </div>
         </div>
 
-        {/* Upload Section (Toggleable) */}
-        {showUpload && (
-          <div className="animate-in fade-in slide-in-from-top-4 duration-300">
-            <CsvUpload onImported={handleImported} />
-          </div>
-        )}
-
-        <SummaryBar transactions={transactions} />
         <SpendingGalaxy transactions={transactions} budgets={budgets} loading={txnLoading} />
         
         {/* Money Flow Sankey Visualization */}
