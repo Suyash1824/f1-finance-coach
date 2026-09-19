@@ -1,8 +1,9 @@
 import os
 import json
-from anthropic import Anthropic
+import google.generativeai as genai
 
-client = Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
+genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+model = genai.GenerativeModel("gemini-3.6-flash")
 
 def generate_insights(summary: dict) -> list[dict]:
     prompt = f"""You are a personal finance coach. Based on this user's financial summary, \
@@ -18,12 +19,8 @@ Respond ONLY with a JSON array (no markdown, no preamble), where each item has e
 Example format:
 [{{"title": "High food spending", "explanation": "You spent 30% more on food this month.", "action": "Try cooking 2 more meals at home per week."}}]
 """
-    response = client.messages.create(
-        model="claude-sonnet-4-5",
-        max_tokens=1000,
-        messages=[{"role": "user", "content": prompt}]
-    )
-    text = response.content[0].text.strip()
+    response = model.generate_content(prompt)
+    text = response.text.strip()
     if text.startswith("```"):
         text = text.strip("`").replace("json", "", 1).strip()
     return json.loads(text)
