@@ -7,6 +7,7 @@ from database import engine, SessionLocal
 from models import Base, Transaction, Category
 from categorizer import categorize_merchant
 from schemas import TransactionOut, ImportSummary
+from recurring_detector import detect_recurring
 
 Base.metadata.create_all(bind=engine)
 
@@ -77,3 +78,8 @@ def get_transactions(db: Session = Depends(get_db)):
         )
         for t in transactions
     ]
+
+@app.post("/recurring/detect")
+def run_recurring_detection(db: Session = Depends(get_db)):
+    results = detect_recurring(db)
+    return {"recurring_expenses_found": len(results), "details": results}
