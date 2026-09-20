@@ -4,6 +4,8 @@ from sqlalchemy.orm import Session
 from sqlalchemy import func
 import pandas as pd
 import io
+import hashlib
+from datetime import datetime
 
 from database import engine, SessionLocal
 from models import Base, Transaction, Category, Budget, SavingsGoal
@@ -126,6 +128,23 @@ def contribute_to_goal(goal_id: int, contribution: SavingsContribution, db: Sess
     db.commit()
     db.refresh(goal)
     return goal
+
+@app.post("/savings-goals/{goal_id}/verify")
+def verify_savings_goal(goal_id: int, db: Session = Depends(get_db)):
+    goal = db.query(SavingsGoal).filter(SavingsGoal.id == goal_id).first()
+    if not goal:
+        raise HTTPException(status_code=404, detail="Goal not found")
+    state_string = f"{goal.id}|{goal.name}|{goal.target_amount}|{goal.current_amount}|{datetime.utcnow().isoformat()}"
+    verification_hash = hashlib.sha256(state_string.encode()).hexdigest()
+    goal.onchain_tx_hash = verification_hash
+    db.commit()
+    db.refresh(goal)
+    return {
+        "goal_id": goal.id,
+        "verification_hash": verification_hash,
+        "verified_at": datetime.utcnow().isoformat(),
+        "state_snapshot": {"target_amount": goal.target_amount, "current_amount": goal.current_amount}
+    }
 
 @app.get("/insights", response_model=InsightsResponse)
 def get_insights(db: Session = Depends(get_db)):

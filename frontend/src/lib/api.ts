@@ -65,5 +65,8 @@ export const createSavingsGoal = (name: string, target_amount: number) =>
 export const contributeToGoal = (id: number, amount: number) =>
   api.post<SavingsGoal>(`/savings-goals/${id}/contribute`, { amount }).then(r => r.data);
 
+export const verifySavingsGoal = (id: number) =>
+  api.post<{ verification_hash: string }>(`/savings-goals/${id}/verify`).then(r => r.data);
+
 export const getInsights = () =>
   api.get<{ insights: InsightItem[] }>('/insights').then(r => r.data.insights);

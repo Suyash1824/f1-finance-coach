@@ -10,16 +10,16 @@ interface Props {
 
 export default function InsightsCard({ insights, loading, error }: Props) {
   return (
-    <div className="rounded-2xl border border-gray-200 dark:border-slate-700/50 bg-white dark:bg-slate-800/50 p-6 shadow-sm dark:shadow-none transition-colors duration-300">
-      <div className="flex items-center gap-2 mb-5">
+    <div className="rounded-2xl border border-gray-200 dark:border-slate-800/50 bg-white dark:bg-slate-900 p-6 shadow-sm dark:shadow-md hover:scale-[1.02] transition-all duration-200">
+      <div className="flex items-center gap-2 mb-6">
         <Sparkles className="w-5 h-5 text-fuchsia-600 dark:text-fuchsia-400" />
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white">AI Financial Insights</h2>
-        <span className="ml-auto text-xs text-gray-500 dark:text-slate-500 bg-gray-100 dark:bg-slate-700 px-2 py-0.5 rounded-full transition-colors duration-300">Gemini</span>
+        <span className="ml-auto text-xs text-gray-500 dark:text-slate-400 bg-gray-100 dark:bg-slate-800 px-2.5 py-1 rounded-md transition-colors duration-300">Gemini</span>
       </div>
       {loading && (
-        <div className="space-y-3">
+        <div className="space-y-4">
           {[1,2,3].map(i => (
-            <div key={i} className="h-20 rounded-xl bg-gray-100 dark:bg-slate-700/40 animate-pulse" />
+            <div key={i} className="h-20 rounded-xl bg-gray-100 dark:bg-slate-800/50 animate-pulse" />
           ))}
         </div>
       )}
@@ -34,12 +34,12 @@ export default function InsightsCard({ insights, loading, error }: Props) {
       {!loading && !error && (
         <div className="space-y-4">
           {insights.map((ins, i) => (
-            <div key={i} className="rounded-xl bg-gray-50 dark:bg-slate-700/30 border-l-4 border-fuchsia-500 p-4 transition-colors duration-300">
+            <div key={i} className="rounded-xl bg-gray-50 dark:bg-slate-800/50 border border-transparent dark:border-slate-700/50 border-l-4 border-l-fuchsia-500 p-4 transition-colors duration-300">
               <p className="font-semibold text-gray-900 dark:text-white text-sm mb-1">{ins.title}</p>
-              <p className="text-gray-600 dark:text-slate-300 text-sm mb-2">{ins.explanation}</p>
+              <p className="text-gray-600 dark:text-slate-300 text-sm mb-3">{ins.explanation}</p>
               <div className="flex items-start gap-2">
                 <span className="text-fuchsia-500 text-xs mt-0.5">→</span>
-                <p className="text-fuchsia-600 dark:text-fuchsia-300 text-xs">{ins.action}</p>
+                <p className="text-fuchsia-600 dark:text-fuchsia-400 text-xs font-medium">{ins.action}</p>
               </div>
             </div>
           ))}
