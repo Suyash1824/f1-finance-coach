@@ -272,7 +272,7 @@ export default function Dashboard() {
                 <span className="text-xl leading-none">&times;</span>
               </button>
             </div>
-            <CsvUpload onUploadSuccess={() => {
+            <CsvUpload onImported={() => {
               setShowImportModal(false);
               fetchData();
             }} />
