@@ -12,6 +12,7 @@ import SavingsGoalsSection from '@/components/SavingsGoalsSection';
 import InsightsCard from '@/components/InsightsCard';
 import CsvUpload from '@/components/CsvUpload';
 import MoneyFlowChart from '@/components/MoneyFlowChart';
+import AnalyticsSection from '@/components/AnalyticsSection';
 import AnimatedCard from '@/components/AnimatedCard';
 import { useTheme } from '@/context/ThemeContext';
 import { Sun, Moon, ArrowLeft, Upload, TrendingUp, TrendingDown, PiggyBank, Wallet, X } from 'lucide-react';
@@ -206,6 +207,9 @@ export default function Dashboard() {
         
         {/* Money Flow Sankey Visualization */}
         <MoneyFlowChart transactions={transactions} budgets={budgets} loading={txnLoading} />
+
+        {/* Data Analytics Section */}
+        <AnalyticsSection transactions={transactions} loading={txnLoading} />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <RecurringCard data={recurring} loading={recurringLoading} />
