@@ -135,7 +135,7 @@ export default function Dashboard() {
       </aside>
 
       {/* MAIN CONTENT */}
-      <main className="flex-1 ml-20 lg:ml-64 p-6 lg:p-10 lg:max-w-7xl relative">
+      <main className="flex-1 ml-20 lg:ml-64 p-6 lg:p-10 relative">
         
         {/* HEADER */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
