@@ -46,7 +46,7 @@ export const getTransactions = () => api.get<Transaction[]>('/transactions').the
 export const importCsv = (file: File) => {
   const form = new FormData();
   form.append('file', file);
-  return api.post('/transactions/import', form, { headers: { 'Content-Type': 'multipart/form-data' } }).then(r => r.data);
+  return api.post('/transactions/import', form).then(r => r.data);
 };
 
 export const detectRecurring = () =>

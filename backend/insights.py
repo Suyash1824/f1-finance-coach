@@ -3,7 +3,7 @@ import json
 import google.generativeai as genai
 
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-model = genai.GenerativeModel("gemini-3.6-flash")
+model = genai.GenerativeModel("gemini-3.8-flash")
 
 def generate_insights(summary: dict) -> list[dict]:
     prompt = f"""You are a personal finance coach. Based on this user's financial summary, \
