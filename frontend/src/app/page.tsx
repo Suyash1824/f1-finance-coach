@@ -105,19 +105,19 @@ export default function Dashboard() {
         </div>
         
         <nav className="flex-1 py-6 flex flex-col gap-2 px-3">
-          <a href="#" className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors ${isDark ? 'bg-indigo-500/10 text-indigo-400' : 'bg-indigo-50 text-indigo-700'}`}>
+          <a href="#dashboard-top" className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors ${isDark ? 'bg-indigo-500/10 text-indigo-400' : 'bg-indigo-50 text-indigo-700'}`}>
             <LayoutDashboard className="w-5 h-5" />
             <span className="hidden lg:block font-medium">Dashboard</span>
           </a>
-          <a href="#" className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors hover:bg-black/5 dark:hover:bg-white/5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+          <a href="#transactions" className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors hover:bg-black/5 dark:hover:bg-white/5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
             <Receipt className="w-5 h-5" />
             <span className="hidden lg:block font-medium">Transactions</span>
           </a>
-          <a href="#" className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors hover:bg-black/5 dark:hover:bg-white/5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+          <a href="#budgets" className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors hover:bg-black/5 dark:hover:bg-white/5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
             <Wallet className="w-5 h-5" />
             <span className="hidden lg:block font-medium">Budgets</span>
           </a>
-          <a href="#" className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors hover:bg-black/5 dark:hover:bg-white/5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+          <a href="#goals" className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors hover:bg-black/5 dark:hover:bg-white/5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
             <Target className="w-5 h-5" />
             <span className="hidden lg:block font-medium">Goals</span>
           </a>
@@ -138,7 +138,7 @@ export default function Dashboard() {
       <main className="flex-1 ml-20 lg:ml-64 p-6 lg:p-10 relative">
         
         {/* HEADER */}
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+        <div id="dashboard-top" className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 pt-2">
           <div>
             <h1 className={`text-3xl font-bold tracking-tight mb-2 ${isDark ? 'text-white' : 'text-gray-900'}`}>
               {greeting()}, Suyash
@@ -195,7 +195,7 @@ export default function Dashboard() {
         </div>
 
         {/* RECENT ACTIVITY TABLE */}
-        <div className={`mb-8 rounded-2xl border transition-colors overflow-hidden ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-gray-200 shadow-sm'}`}>
+        <div id="transactions" className={`mb-8 rounded-2xl border transition-colors overflow-hidden ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-gray-200 shadow-sm pt-2 mt-[-8px]'}`}>
           <div className={`px-6 py-4 border-b ${isDark ? 'border-slate-800' : 'border-gray-100'} flex justify-between items-center`}>
             <h2 className={`text-lg font-semibold ${isDark ? 'text-white' : 'text-gray-900'}`}>Recent Activity</h2>
             <button className={`text-sm font-medium ${isDark ? 'text-indigo-400 hover:text-indigo-300' : 'text-indigo-600 hover:text-indigo-700'}`}>View All</button>
@@ -249,8 +249,8 @@ export default function Dashboard() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <BudgetsSection budgets={budgets} onRefresh={() => getBudgets().then(setBudgets)} />
-            <SavingsGoalsSection goals={goals} onRefresh={() => getSavingsGoals().then(setGoals)} />
+            <div id="budgets" className="pt-2"><BudgetsSection budgets={budgets} onRefresh={() => getBudgets().then(setBudgets)} /></div>
+            <div id="goals" className="pt-2"><SavingsGoalsSection goals={goals} onRefresh={() => getSavingsGoals().then(setGoals)} /></div>
           </div>
         </div>
 
