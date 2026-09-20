@@ -132,44 +132,44 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 items-center relative z-10">
           
           <div className="space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/40 backdrop-blur-md border border-white/50 text-slate-900 text-xs font-bold tracking-wide">
-              <Zap className="w-4 h-4 text-rose-600" />
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold tracking-wide">
+              <Zap className="w-4 h-4 text-rose-400" />
               AI-Powered Finance Coach
             </div>
 
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] text-white drop-shadow-sm">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] text-white">
               Manage Your Money, <br />
-              <span className="italic font-serif text-white/90 drop-shadow-sm">Smarter, Faster, Better</span>
+              <span className="italic font-serif text-white">Smarter, Faster, Better</span>
             </h1>
 
-            <p className="text-lg sm:text-xl font-medium leading-relaxed max-w-xl text-gray-100 drop-shadow-sm">
+            <p className="text-lg sm:text-xl font-medium leading-relaxed max-w-xl text-gray-300">
               Supercharge your wealth accumulation with automated categorization, interactive 3D visualizations, and actionable AI insights that keep your spending in check.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 pt-4">
               <Link
                 href="/dashboard"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl text-base font-bold text-white bg-slate-900 hover:bg-black shadow-xl shadow-black/20 transition-all hover:-translate-y-0.5"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-2xl text-base font-bold text-slate-900 bg-white hover:bg-gray-100 shadow-xl shadow-black/20 transition-all hover:-translate-y-0.5"
               >
                 <span>Get Started</span>
                 <ArrowRight className="w-5 h-5" />
               </Link>
-              <button className="group flex items-center gap-2 font-bold hover:text-black transition-colors" style={{ color: '#0f172a' }}>
-                <div className="w-12 h-12 rounded-full bg-white/50 group-hover:bg-white/70 flex items-center justify-center backdrop-blur-md transition-colors">
+              <button className="group flex items-center gap-2 font-bold text-gray-400 hover:text-white transition-colors">
+                <div className="w-12 h-12 rounded-full bg-white/10 group-hover:bg-white/20 flex items-center justify-center backdrop-blur-md transition-colors text-white">
                   <Play className="w-4 h-4 fill-current ml-1" />
                 </div>
                 Watch Demo
               </button>
             </div>
 
-            <div className="pt-8 border-t border-slate-900/10">
+            <div className="pt-8 border-t border-white/10">
               <div className="flex gap-1 text-white mb-2">
                 {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
               </div>
-              <div className="flex items-center gap-6 text-sm font-bold" style={{ color: '#0f172a' }}>
-                <div>24K+ <span className="font-medium" style={{ color: '#334155' }}>Analyzed</span></div>
-                <div>18 <span className="font-medium" style={{ color: '#334155' }}>Categories</span></div>
-                <div>1.2M <span className="font-medium" style={{ color: '#334155' }}>Insights</span></div>
+              <div className="flex items-center gap-6 text-sm font-bold text-gray-400">
+                <div>24K+ <span className="font-medium text-gray-400">Analyzed</span></div>
+                <div>18 <span className="font-medium text-gray-400">Categories</span></div>
+                <div>1.2M <span className="font-medium text-gray-400">Insights</span></div>
               </div>
             </div>
           </div>
