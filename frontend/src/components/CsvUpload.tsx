@@ -17,9 +17,12 @@ export default function CsvUpload({ onImported }: Props) {
     try {
       const result = await importCsv(file);
       setStatus(`✓ Imported ${result.total_imported} transactions (${result.categorized} categorized)`);
-      onImported();
-    } catch {
-      setStatus('Import failed — check the file format and try again.');
+      if (typeof onImported === 'function') {
+        onImported();
+      }
+    } catch (err: any) {
+      console.error("Upload error:", err);
+      setStatus(`Import failed: ${err?.message || 'Unknown error'}`);
     } finally { setLoading(false); }
   };
 
