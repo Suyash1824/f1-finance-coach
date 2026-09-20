@@ -94,6 +94,11 @@ export default function Dashboard() {
     document.getElementById('insights-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const scrollTo = (id: string, e: React.MouseEvent) => {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className={`min-h-screen font-sans flex ${isDark ? 'bg-slate-950 text-slate-200' : 'bg-gray-50 text-gray-900'} transition-colors duration-300`}>
       
@@ -105,19 +110,19 @@ export default function Dashboard() {
         </div>
         
         <nav className="flex-1 py-6 flex flex-col gap-2 px-3">
-          <a href="#dashboard-top" className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors ${isDark ? 'bg-indigo-500/10 text-indigo-400' : 'bg-indigo-50 text-indigo-700'}`}>
+          <a href="#dashboard-top" onClick={(e) => scrollTo('dashboard-top', e)} className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors ${isDark ? 'bg-indigo-500/10 text-indigo-400' : 'bg-indigo-50 text-indigo-700'}`}>
             <LayoutDashboard className="w-5 h-5" />
             <span className="hidden lg:block font-medium">Dashboard</span>
           </a>
-          <a href="#transactions" className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors hover:bg-black/5 dark:hover:bg-white/5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+          <a href="#transactions" onClick={(e) => scrollTo('transactions', e)} className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors hover:bg-black/5 dark:hover:bg-white/5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
             <Receipt className="w-5 h-5" />
             <span className="hidden lg:block font-medium">Transactions</span>
           </a>
-          <a href="#budgets" className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors hover:bg-black/5 dark:hover:bg-white/5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+          <a href="#budgets" onClick={(e) => scrollTo('budgets', e)} className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors hover:bg-black/5 dark:hover:bg-white/5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
             <Wallet className="w-5 h-5" />
             <span className="hidden lg:block font-medium">Budgets</span>
           </a>
-          <a href="#goals" className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors hover:bg-black/5 dark:hover:bg-white/5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
+          <a href="#goals" onClick={(e) => scrollTo('goals', e)} className={`flex items-center gap-3 px-3 py-3 rounded-xl transition-colors hover:bg-black/5 dark:hover:bg-white/5 ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
             <Target className="w-5 h-5" />
             <span className="hidden lg:block font-medium">Goals</span>
           </a>
